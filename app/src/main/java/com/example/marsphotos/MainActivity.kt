@@ -18,17 +18,32 @@ package com.example.marsphotos
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import com.example.marsphotos.ui.MarsPhotosApp
 import com.example.marsphotos.ui.theme.MarsPhotosTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        enableEdgeToEdge()
+        val lightPrimary = Color(0xFFBE6B24).toArgb()
+        val darkPrimary = Color(0xFF4F2107).toArgb()
+
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.auto(lightPrimary, darkPrimary),
+            //navigationBarStyle = SystemBarStyle.auto(lightPrimary, darkPrimary)
+// ________ transparent navigation bar
+//            navigationBarStyle = SystemBarStyle.light(
+//                android.graphics.Color.TRANSPARENT,
+//                android.graphics.Color.TRANSPARENT
+//            )
+// ________ transparent navigation bar
+        )
         super.onCreate(savedInstanceState)
         setContent {
             MarsPhotosTheme {

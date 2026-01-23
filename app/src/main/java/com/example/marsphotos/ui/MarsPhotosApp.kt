@@ -29,8 +29,10 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.marsphotos.R
 import com.example.marsphotos.ui.screens.HomeScreen
@@ -48,8 +50,8 @@ fun MarsPhotosApp() {
         ) {
             val marsViewModel: MarsViewModel = viewModel(factory = MarsViewModel.Factory)
             HomeScreen(
-                retryAction = { marsViewModel.getMarsPhotos() },
                 marsUiState = marsViewModel.marsUiState,
+                retryAction = { marsViewModel.getMarsPhotos() },
                 contentPadding = it,
             )
         }
@@ -66,6 +68,16 @@ fun MarsTopAppBar(scrollBehavior: TopAppBarScrollBehavior, modifier: Modifier = 
                 style = MaterialTheme.typography.headlineSmall,
             )
         },
-        modifier = modifier
+        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+            // Цвет, когда контент находится под баром (после скролла)
+            scrolledContainerColor = MaterialTheme.colorScheme.primary,
+            // Цвет в обычном состоянии
+            containerColor = MaterialTheme.colorScheme.primary,
+            // Цвет текста/иконок
+            titleContentColor = MaterialTheme.colorScheme.onSurface,
+        ),
+        modifier = modifier.shadow(
+            elevation = if (scrollBehavior.state.contentOffset < 0f) 8.dp else 0.dp
+        )
     )
 }

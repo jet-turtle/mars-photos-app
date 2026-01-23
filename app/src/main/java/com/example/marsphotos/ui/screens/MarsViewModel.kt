@@ -35,7 +35,7 @@ import java.io.IOException
 sealed interface MarsUiState {
     data object Error : MarsUiState
     data object Loading : MarsUiState
-    data class Success(val photos: String) : MarsUiState
+    data class Success(val photos: List<MarsPhoto>) : MarsUiState
 }
 
 class MarsViewModel(
@@ -60,9 +60,8 @@ class MarsViewModel(
         marsUiState = MarsUiState.Loading
         viewModelScope.launch {
             marsUiState = try {
-                delay(1_000)
-                val listResult = marsPhotosRepository.getMarsPhotos()
-                MarsUiState.Success("Success: ${listResult.size} Mars photos retrieved")
+                //delay(500L)
+                MarsUiState.Success(marsPhotosRepository.getMarsPhotos())
             } catch (e: IOException) {
                 MarsUiState.Error
             } catch (e: HttpException) {
