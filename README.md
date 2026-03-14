@@ -36,3 +36,9 @@ Learn how to improve the architecture of the app by separating the network calls
 
 ### [Load and display images from the internet](https://developer.android.com/codelabs/basic-android-kotlin-compose-load-images)
 Use the Coil library to load and display photos from the internet in your Android Compose app. 
+
+Screenshots
+---------------
+| Main Screen | Loading Screen | Detail Screen |
+| :---: | :---: | :---: |
+| ![Main](screenshots/mars_1.jpg) | ![Create](screenshots/mars_2.jpg) | ![Create](screenshots/mars_3.jpg) |
